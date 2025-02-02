@@ -33,6 +33,7 @@ This package provides methods for traversing the file system and returning pathn
     * [fs](#fs)
     * [ignore](#ignore)
     * [suppressErrors](#suppresserrors)
+    * [suppressEacces](#suppresseacces)
     * [throwErrorOnBrokenSymbolicLink](#throwerroronbrokensymboliclink)
     * [signal](#signal)
   * [Output control](#output-control)
@@ -396,6 +397,13 @@ fg.globSync('*.json', { ignore: ['package-lock.json'] }); // ['package.json']
 By default this package suppress only `ENOENT` errors. Set to `true` to suppress any error.
 
 > :book: Can be useful when the directory has entries with a special level of access.
+
+#### suppressEacces
+
+* Type: `boolean`
+* Default: `false`
+
+By default, the package throws `EACCES` if a path cannot be accessed due to permission erros. Set to `true` to suppress these errors.
 
 #### throwErrorOnBrokenSymbolicLink
 

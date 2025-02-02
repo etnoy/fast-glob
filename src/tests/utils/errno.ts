@@ -14,3 +14,7 @@ export function getEnoent(): ErrnoException {
 export function getEperm(): ErrnoException {
 	return new SystemError('EPERM', 'operation not permitted');
 }
+
+export function getEacces(): ErrnoException {
+	return new SystemError('EACCES', 'permission denied');
+}

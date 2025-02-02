@@ -1,6 +1,6 @@
 import * as fs from 'node:fs';
 
-import type { FileSystemAdapter, Pattern } from './types';
+import type { ErrnoException, FileSystemAdapter, Pattern } from './types';
 
 export const DEFAULT_FILE_SYSTEM_ADAPTER: FileSystemAdapter = {
 	lstat: fs.lstat,
@@ -126,6 +126,12 @@ export interface Options {
 	 */
 	suppressErrors?: boolean;
 	/**
+	 * Callback for user-defined error handling. Ignored if `suppressErrors` is `true`.
+	 *
+	 * @default false
+	 */
+	errorHandler?: (error: Error) => void;
+	/**
 	 * Throw an error when symbolic link is broken if `true` or safely
 	 * return `lstat` call if `false`.
 	 *
@@ -166,6 +172,7 @@ export default class Settings {
 	public readonly onlyFiles: boolean;
 	public readonly stats: boolean;
 	public readonly suppressErrors: boolean;
+	public readonly errorHandler: ((error: ErrnoException) => void) | undefined;
 	public readonly throwErrorOnBrokenSymbolicLink: boolean;
 	public readonly unique: boolean;
 	public readonly signal?: AbortSignal;
@@ -190,7 +197,9 @@ export default class Settings {
 		this.onlyFiles = options.onlyFiles ?? true;
 		this.stats = options.stats ?? false;
 		this.suppressErrors = options.suppressErrors ?? false;
-		this.throwErrorOnBrokenSymbolicLink = options.throwErrorOnBrokenSymbolicLink ?? false;
+		this.errorHandler = options.errorHandler ?? undefined;
+		this.throwErrorOnBrokenSymbolicLink =
+			options.throwErrorOnBrokenSymbolicLink ?? false;
 		this.unique = options.unique ?? true;
 		this.signal = options.signal;
 

@@ -52,5 +52,13 @@ describe('Providers → Filters → Error', () => {
 
 			assert.ok(!actual);
 		});
+
+		it('should return false for EACCES error', () => {
+			const filter = getFilter();
+
+			const actual = filter(tests.errno.getEacces());
+
+			assert.ok(!actual);
+		});
 	});
 });
