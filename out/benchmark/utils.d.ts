@@ -1,0 +1,12 @@
+import type * as currentVersion from '..';
+import type * as previousVersion from 'fast-glob';
+import type * as glob from 'glob';
+import type * as tg from 'tinyglobby';
+export declare function timeStart(): number;
+export declare function timeEnd(start: number): number;
+export declare function getMemory(): number;
+export declare function importCurrentFastGlob(): Promise<typeof currentVersion>;
+export declare function importPreviousFastGlob(): Promise<typeof previousVersion>;
+export declare function importNodeGlob(): Promise<typeof glob>;
+export declare function importTinyGlobby(): Promise<typeof tg>;
+export declare function importAndMeasure<T>(function_: () => Promise<T>): Promise<T>;

@@ -14,7 +14,7 @@ node_modules/
 .eslintcache
 .tmp/
 .benchmark/
-out/
+#out/
 build/
 
 # Other files
