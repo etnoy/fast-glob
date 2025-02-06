@@ -48,6 +48,10 @@ export abstract class Reader<T> {
 			return false;
 		}
 
+		if (this.#settings.errorHandler !== undefined) {
+			return !this.#settings.errorHandler(error);
+		}
+
 		if (utils.errno.isEnoentCodeError(error)) {
 			return false;
 		}

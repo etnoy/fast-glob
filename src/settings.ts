@@ -126,11 +126,12 @@ export interface Options {
 	 */
 	suppressErrors?: boolean;
 	/**
-	 * Callback for user-defined error handling. Ignored if `suppressErrors` is `true`.
+	 * Callback for user-defined error handling. Ignored if
+	 * `suppressErrors` is `true`. Return `true` to suppress an error,
+	 * `false` to throw it.
 	 *
-	 * @default false
 	 */
-	errorHandler?: (error: Error) => void;
+	errorHandler?: (error: Error) => boolean;
 	/**
 	 * Throw an error when symbolic link is broken if `true` or safely
 	 * return `lstat` call if `false`.
@@ -172,7 +173,7 @@ export default class Settings {
 	public readonly onlyFiles: boolean;
 	public readonly stats: boolean;
 	public readonly suppressErrors: boolean;
-	public readonly errorHandler: ((error: ErrnoException) => void) | undefined;
+	public readonly errorHandler: ((error: ErrnoException) => boolean) | undefined;
 	public readonly throwErrorOnBrokenSymbolicLink: boolean;
 	public readonly unique: boolean;
 	public readonly signal?: AbortSignal;
@@ -198,8 +199,7 @@ export default class Settings {
 		this.stats = options.stats ?? false;
 		this.suppressErrors = options.suppressErrors ?? false;
 		this.errorHandler = options.errorHandler ?? undefined;
-		this.throwErrorOnBrokenSymbolicLink =
-			options.throwErrorOnBrokenSymbolicLink ?? false;
+		this.throwErrorOnBrokenSymbolicLink =	options.throwErrorOnBrokenSymbolicLink ?? false;
 		this.unique = options.unique ?? true;
 		this.signal = options.signal;
 

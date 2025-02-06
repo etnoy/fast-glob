@@ -115,11 +115,12 @@ export interface Options {
      */
     suppressErrors?: boolean;
     /**
-     * Callback for user-defined error handling. Ignored if `suppressErrors` is `true`.
+     * Callback for user-defined error handling. Ignored if
+     * `suppressErrors` is `true`. Return `true` to suppress an error,
+     * `false` to throw it.
      *
-     * @default false
      */
-    errorHandler?: (error: Error) => void;
+    errorHandler?: (error: Error) => boolean;
     /**
      * Throw an error when symbolic link is broken if `true` or safely
      * return `lstat` call if `false`.
@@ -161,7 +162,7 @@ export default class Settings {
     readonly onlyFiles: boolean;
     readonly stats: boolean;
     readonly suppressErrors: boolean;
-    readonly errorHandler: ((error: ErrnoException) => void) | undefined;
+    readonly errorHandler: ((error: ErrnoException) => boolean) | undefined;
     readonly throwErrorOnBrokenSymbolicLink: boolean;
     readonly unique: boolean;
     readonly signal?: AbortSignal;

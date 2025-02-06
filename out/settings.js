@@ -54,8 +54,7 @@ class Settings {
         this.stats = options.stats ?? false;
         this.suppressErrors = options.suppressErrors ?? false;
         this.errorHandler = options.errorHandler ?? undefined;
-        this.throwErrorOnBrokenSymbolicLink =
-            options.throwErrorOnBrokenSymbolicLink ?? false;
+        this.throwErrorOnBrokenSymbolicLink = options.throwErrorOnBrokenSymbolicLink ?? false;
         this.unique = options.unique ?? true;
         this.signal = options.signal;
         if (this.onlyDirectories) {

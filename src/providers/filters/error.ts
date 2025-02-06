@@ -20,8 +20,7 @@ export default class ErrorFilter {
 		}
 
 		if (this.#settings.errorHandler !== undefined) {
-			this.#settings.errorHandler(error);
-			return true;
+			return this.#settings.errorHandler(error);
 		}
 
 		if (utils.errno.isEnoentCodeError(error)) {

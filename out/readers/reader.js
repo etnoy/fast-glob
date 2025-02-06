@@ -33,6 +33,9 @@ class Reader {
         if (this.#settings.suppressErrors) {
             return false;
         }
+        if (this.#settings.errorHandler !== undefined) {
+            return !this.#settings.errorHandler(error);
+        }
         if (utils.errno.isEnoentCodeError(error)) {
             return false;
         }
